@@ -30,7 +30,7 @@ function renderAll() {
   renderTomatoes();
   renderOnions();
   renderLettuce();
-  renderButtons();
+  renderButtons(name,states)
   renderIngredientsBoard();
   renderPrice();
 }
@@ -47,18 +47,42 @@ function renderPatty() {
 
 function renderCheese() {
   //Trial 1 - Change the visibility of cheese based on state by manipulating the DOM
+  let cheese = document.querySelector("#cheese");
+  if(state.Cheese){
+    cheese.style.display = "inherit";
+  }else{
+    cheese.style.display = "none";
+  }
 }
 
 function renderTomatoes() {
   //Trial 1 - Change the visibility of Tomatoes based on state by manipulating the DOM
+  let tomato = document.querySelector("#tomato");
+  if (state.Tomatoes) {
+    tomato.style.display = "inherit";
+  } else {
+    tomato.style.display = "none";
+  }
 }
 
 function renderOnions() {
   //Trial 1 - Change the visibility of Onions based on state by manipulating the DOM
+  let onion = document.querySelector("#onion");
+  if (state.Onions) {
+    onion.style.display = "inherit";
+  } else {
+    onion.style.display = "none";
+  }
 }
 
 function renderLettuce() {
   //Trial 1 - Change the visibility of Lettuce based on state by manipulating the DOM
+  let lettuces = document.querySelector("#lettuce");
+  if(state.Lettuce){
+    lettuces.style.display = "inherit";
+  } else{
+    lettuces.style.display = "none";
+  }
 }
 
 document.querySelector(".btn-patty").onclick = function () {
@@ -67,22 +91,48 @@ document.querySelector(".btn-patty").onclick = function () {
 };
 
 // Trial 2 - Setup event listener for the cheese button
+document.querySelector(".btn-cheese").onclick = function () {
+  state.Cheese = !state.Cheese;
+  renderAll();
+};
 
 
 // Trial 2 - Setup event listener for the tomatoes button
-
+document.querySelector(".btn-tomatoes").onclick = function () {
+  state.Tomatoes = !state.Tomatoes;
+  renderAll();
+};
 
 // Trial 2 - Setup event listener for the onion button
-
+document.querySelector(".btn-onions").onclick = function () {
+  state.Onions = !state.Onions;
+  renderAll();
+};
 
 // Trial 2 - Setup event listener for the lettuce button
-
+document.querySelector(".btn-lettuce").onclick = function () {
+  state.Lettuce = !state.Lettuce;
+  renderAll();
+}
 
 //Challenge 1 - Add/Remove the class active to the buttons based on state
-
+let renderButtons = (name, activeState) => {
+  let displayProperty = document.querySelector(`.${name}`);
+  displayProperty.classList.toggle("active");
+};
 
 //Challenge 2 - Render only the items selected in the ingredients board based on the state
-
+let renderIngredientsBoard = () => {
+  for (const item in state) {
+    let ingredient = document.getElementsByClassName("items");
+    for (const element of ingredient) {
+      if (item == element.innerHTML) {
+        if (state[item]) element.style.display = "inherit";
+        else element.style.display = "none";
+      }
+    }
+  }
+};
 
 //Judgement 1
 //In the p element having price-details as the class, display the calculated
